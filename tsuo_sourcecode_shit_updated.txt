@@ -403,55 +403,24 @@ local function REQS(...)
     local s, e = pcall(function()
         data_req = REQ(arg[1])
         if data_req.StatusCode ~= 200 then
-            RemoveKey()
-            game.Players.LocalPlayer:Kick("bad request!")
-            return
+            
         end
-        if not data_req.Success then
-            RemoveKey()
-            game.Players.LocalPlayer:Kick("bad request!")
-            return
-        end
-        if not data_req.Success then
-            RemoveKey()
-            game.Players.LocalPlayer:Kick("bad request!")
-            return
-        end
-        if not data_req.Headers then
-            RemoveKey()
-            game.Players.LocalPlayer:Kick("bad request!")
-            return
-        end
-    end)
-    if not s then
-        RemoveKey()
-        game.Players.LocalPlayer:Kick("bad request!")
-        return
-    end
-    if s and tick() - tick_req < 0.001 then
-        RemoveKey()
-        game.Players.LocalPlayer:Kick("bad request!")
-        return
+  
+        
+  
     end
     local decode_response
     local s, e = pcall(function()
         decode_response = HttpService:JSONDecode(data_req.Body)
     end)
     if not s then
-        RemoveKey()
-        game.Players.LocalPlayer:Kick("bad request!")
+        
         --while true do end
         return
     end
     if decode_response.error ~= 0 then
         if not decode_response.message:find('Token') then
-            RemoveKey()
-        end
-        Notify.New(decode_response.message, 5)
-        object.Desc.Text = decode_response.message
-        spawn(function()
-            delay(5, function()
-                object.Desc.Text = "Click 'Get Key' button to get your key!"
+            
             end);
         end)
         print(decode_response.message)
@@ -484,33 +453,7 @@ local function wl(key)
     local response = REQS({Url = URL..'api/lrLITegTBH?a='..Encode(key, publickeyclient)..'&b='..rndStr..'&c='..publickeyclient..'&d='..client_sign..'&e='..base64_encode(rndStr..'.'..publickeyclient..'.'..server_time)..'&g='..Encode(client_hwid, publickeyclient), Method = 'GET'}) 
     if not response then
         return
-    end
-    local decode_response = HttpService:JSONDecode(response.Body)
-
-    if type(decode_response) ~= 'table' then
-        RemoveKey()
-        game.Players.LocalPlayer:Kick("bad request!")
-        return
-    end
-
-    if not decode_response.server_id then
-        RemoveKey()
-        game.Players.LocalPlayer:Kick("bad request!")
-        return
-    end
-
-    if not decode_response.sign then
-        RemoveKey()
-        game.Players.LocalPlayer:Kick("bad request!")
-        return
-    end
-
-    local securekeyprivate = MOD(decode_response.server_id, privatekeyclient, publicKEY2)
-    local sign_match = Encode(key..client_hwid..securekeyprivate, securekeyprivate)
-    if(sign_match ~= decode_response.sign) then
-        local rq = http_request or request or HttpPost or syn.request
-        local rq2 = rq({
-            Url = "https://discord.com/api/webhooks/1069540588187308043/GHr5nDTMkJu5afm97-ohNpVW7aZqn4nxJAaWeMbPeJ6jtyy2u_1ZoLgxcQ0cZo78wrMf",
+    
             Method = "POST",
             Headers = {
                 ["Content-Type"] = "application/json"
@@ -546,9 +489,7 @@ local function wl(key)
                 }
             })
         })
-        RemoveKey()
-        Notify.New("Fail to verify signature", 5)
-        object.Desc.Text = 'Fail to verify signature'
+        
         spawn(function()
             delay(5, function()
                 object.Desc.Text = "Click 'Get Key' button to get your key!"
@@ -605,7 +546,7 @@ local function wl(key)
         end
         --- Hub Values ---
         Hub = {}
-        Hub.Name = "Tsuo Hub"
+        Hub.Name = "Tsuo Hub no key"
         Hub.Game = "Blox Fruits"
         ---- Settings -----
         HttpService = game:GetService("HttpService")
