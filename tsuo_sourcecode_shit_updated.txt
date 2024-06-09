@@ -2,29 +2,7 @@
 
 
 
-if getgenv().ScriptExecute then return print('Script Already Execute') end
-local start_check_time = tick()
-getgenv().ScriptExecute = true
-repeat task.wait() until game:IsLoaded() and game.Players and game.Players.LocalPlayer  
-if game.CoreGui:FindFirstChild("Mo Mo Be") then
-    game.CoreGui:FindFirstChild("Mo Mo Be"):Destroy()
-end  
-spawn(function()
-    keyuicheck = tick()
-    repeat task.wait() 
-        if tick()-keyuicheck >= 15 then 
-            game:GetService("TeleportService"):TeleportToPlaceInstance(
-                game.PlaceId,
-                game.JobId,
-                game.Players.LocalPlayer
-            ) 
-        end
-    until game.CoreGui:FindFirstChild("Mo Mo Be") 
-end)
-if islclosure(getgenv().setfenv) then game.Players.LocalPlayer:Kick("MMB 1") while true do end end -- ANTI SETFENV TAMPERING
-if islclosure(getgenv().tostring) then game.Players.LocalPlayer:Kick("MMB 2") while true do end end -- ANTI TOSTRING TAMPERING
-getgenv().clonefunction = nil
-getgenv().clonefunc = nil
+
 local Notify = loadstring(game:HttpGet("https://raw.githubusercontent.com/x9PSwiftz/Panda/main/Notification.lua"))() 
 local instance = {obj = {}}
 local object = instance.obj
@@ -216,11 +194,7 @@ object.Desc = instance.new("TextLabel", {
     TextSize = 14.000;
 })
 
-function RemoveKeyUI() 
-    do
-        local keyui = game.CoreGui:FindFirstChild("Mo Mo Be")
-        if keyui then
-            keyui:Destroy()
+
         end 
     end
 end
@@ -237,14 +211,6 @@ local function SaveKey()
     end)
 end
 
-local function RemoveKey()
-    local s, e = pcall(function()
-        if isfile('tsuo.bin') then
-            delfile('tsuo.bin')
-        end
-    end)
-end
-
 local function ReadKey()
     local KEY;
     local s, e = pcall(function()
@@ -257,43 +223,7 @@ local function ReadKey()
     return KEY
 end
 
-local URL = 'https://tsuo-script.xyz/'
-local publicKEY1 = 3521
-local publicKEY2 = 16748
-local base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 
-local REQ = (syn and syn.request) or (identifyexecutor() == 'Fluxus' and request) or http_request or http.request or request
-local HttpService = game:GetService("HttpService")
-local Char = string.char
-local charTBL = table.create(255)
-local RndSeed = 999
-local RndNumber
-
-for i=0,255 do
-    local char = Char(i)
-    charTBL[i] = char
-    charTBL[char] = i
-end
-
-do
-    local r, f = Random.new()
-    local mt = getrawmetatable(r)
-  
-    if islclosure(Random.new) then
-        game.Players.LocalPlayer:Kick("MMB 3") while true do end
-    end
-
-    if islclosure(HttpService.JSONDecode) then
-        game.Players.LocalPlayer:Kick("MMB 4") while true do end    
-    end
-
-    if islclosure(HttpService.JSONEncode) then
-        game.Players.LocalPlayer:Kick("MMB 5") while true do end
-    end
-    if islclosure(identifyexecutor) then game.Players.LocalPlayer:Kick("MMB 6") while true do end end 
-    if islclosure(REQ) and identifyexecutor() ~= "Delta" and identifyexecutor() ~= "Delta Android" then
-        game.Players.LocalPlayer:Kick("MMB 7") while true do end
-    end
 
   
     f = mt.__index(r, "NextInteger")
@@ -441,18 +371,9 @@ local function wl(key)
         server_time = sp[3]
     end)
     if not a or not client_hwid or not client_ip or not server_time then
-        RemoveKey()
-        game.Players.LocalPlayer:Kick("bad request!")
-        return
-    end
+   end
     update_seed()
-    local privatekeyclient = RndNumber(111, 999) + RndN(111, 999)
-    local publickeyclient = MOD(publicKEY1, privatekeyclient, publicKEY2)
-    local rndStr = RandomStr()
-    local client_sign = Encode(client_hwid..client_ip..rndStr..key, publickeyclient)
-    local response = REQS({Url = URL..'api/lrLITegTBH?a='..Encode(key, publickeyclient)..'&b='..rndStr..'&c='..publickeyclient..'&d='..client_sign..'&e='..base64_encode(rndStr..'.'..publickeyclient..'.'..server_time)..'&g='..Encode(client_hwid, publickeyclient), Method = 'GET'}) 
-    if not response then
-        return
+    
     
             Method = "POST",
             Headers = {
@@ -503,21 +424,12 @@ local function wl(key)
         print(decode_response.message)
         Notify.New(decode_response.message, 5)
         local expired = tonumber(decode_response.expired) / 1000 -- sec
-        sign_match = nil
-        securekeyprivate = nil
-        response = nil
-        privatekeyclient = nil
-        client_id = nil
-        client_req = nil
-        client_hwid = nil
-        client_ip = nil 
+  
         server_time = nil
         sp = nil
         rndStr = nil
         client_sign = nil
-        decode_response = nil
-        RemoveKeyUI()
-        SaveKey()
+        decode_response il
         getgenv().ScriptExecute = true
         if _G.Backycho then
             return
